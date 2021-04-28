@@ -11,9 +11,8 @@ export const Container = styled.div`
     margin-top: 1rem;
 
     input {
-      height: 2rem;
       width: 200px;
-      padding: 20px 5px;
+      padding: 5px;
     }
 
     button {
@@ -22,6 +21,7 @@ export const Container = styled.div`
       border: 0;
       background-color: var(--red);
       color: #fff;
+      border-radius: 0.5rem;
 
       transition: filter 0.2s;
 
