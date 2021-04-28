@@ -27,11 +27,11 @@ function App() {
         <GlobalStyle />
         <Header onOpenTodosModal={handleOpenNewTodosModal} />
         <TodosList />
+        <NewTodoModal
+          isOpen={isNewTodoModalOpen}
+          onRequestClose={handleCloseNewTransactionModal}
+        />
       </TodosProvider>
-      <NewTodoModal
-        isOpen={isNewTodoModalOpen}
-        onRequestClose={handleCloseNewTransactionModal}
-      />
     </>
   );
 }
