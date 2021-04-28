@@ -12,7 +12,6 @@ export function Todos({ date, text, isActive }: TodosProps) {
     <>
       <div>
         <span>{date}</span>
-        <br />
         <p>{text}</p>
       </div>
       <input
