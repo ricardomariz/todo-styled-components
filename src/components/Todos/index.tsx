@@ -9,7 +9,7 @@ interface TodosProps {
 export function Todos({ date, text, isActive }: TodosProps) {
   const [active, setActive] = useState(isActive);
   return (
-    <>
+    <li>
       <div>
         <span>{date}</span>
         <p>{text}</p>
@@ -21,6 +21,6 @@ export function Todos({ date, text, isActive }: TodosProps) {
         checked={active}
         onChange={() => setActive(!active)}
       />
-    </>
+    </li>
   );
 }

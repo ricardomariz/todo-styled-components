@@ -13,6 +13,10 @@ export const Container = styled.div`
     list-style: none;
     padding: 1rem;
 
+    h2 {
+      text-align: center;
+    }
+
     li {
       padding: 1rem;
       border: 1px solid var(--text-body);
