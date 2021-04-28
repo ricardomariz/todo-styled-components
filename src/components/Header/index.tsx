@@ -1,11 +1,15 @@
 import { Container, Content } from "./styles";
 
-export function Header() {
+interface HeaderProps {
+  onOpenTodosModal: () => void;
+}
+
+export function Header({ onOpenTodosModal }: HeaderProps) {
   return (
     <Container>
       <Content>
         <h1>Todo List</h1>
-        <button>Create Todo</button>
+        <button onClick={onOpenTodosModal}>Create Todo</button>
       </Content>
     </Container>
   );
