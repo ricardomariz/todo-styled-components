@@ -1,5 +1,7 @@
 import { FormEvent, useState } from "react";
 import Modal from "react-modal";
+import { MdClose } from "react-icons/md";
+
 import { useTodos } from "../../hooks/useTodos";
 import { Container } from "./styles";
 
@@ -16,6 +18,7 @@ export function NewTodoModal({ isOpen, onRequestClose }: NewTodoModalProps) {
     event.preventDefault();
 
     const newTodo = {
+      id: Math.random(),
       text: todoText,
       date: new Date().toString(),
       isActive: false,
@@ -41,7 +44,7 @@ export function NewTodoModal({ isOpen, onRequestClose }: NewTodoModalProps) {
           onClick={onRequestClose}
           className="react-modal-close"
         >
-          <h3>X</h3>
+          <MdClose size={"1.5rem"} />
         </button>
         <Container>
           <h2>Create New Todo</h2>

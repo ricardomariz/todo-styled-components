@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
 interface TodosProps {
+  id: number;
   date: string;
   text: string;
   isActive: boolean;
@@ -13,6 +14,8 @@ interface ProviderProps {
 interface TodosContextData {
   todos: TodosProps[];
   createTodos: (todo: TodosProps) => Promise<void>;
+  deleteTodo: (id: number) => Promise<void>;
+  toggleCheckActive: (id: number) => Promise<void>;
 }
 
 const TodosContext = createContext<TodosContextData>({} as TodosContextData);
@@ -29,16 +32,44 @@ export function TodosProvider({ children }: ProviderProps) {
   });
 
   async function createTodos({ date, text, isActive }: TodosProps) {
-    setTodos([...todos, { date, text, isActive }]);
+    setTodos([...todos, { id: Math.random(), date, text, isActive }]);
 
     localStorage.setItem(
       "@todos",
-      JSON.stringify([...todos, { date, text, isActive }])
+      JSON.stringify([...todos, { id: Math.random(), date, text, isActive }])
     );
   }
 
+  async function deleteTodo(id: number) {
+    const newTodos = todos.filter((todo) => todo.id !== id);
+
+    setTodos(newTodos);
+    localStorage.setItem("@todos", JSON.stringify(newTodos));
+  }
+
+  async function toggleCheckActive(id: number) {
+    const todoToBeToggled = todos.find((todo) => todo.id === id);
+
+    if (todoToBeToggled) {
+      const newTodos = todos.map((todo) => {
+        if (todo === todoToBeToggled) {
+          return {
+            ...todo,
+            isActive: !todo.isActive,
+          };
+        } else {
+          return todo;
+        }
+      });
+      setTodos(newTodos);
+      localStorage.setItem("@todos", JSON.stringify(newTodos));
+    }
+  }
+
   return (
-    <TodosContext.Provider value={{ todos, createTodos }}>
+    <TodosContext.Provider
+      value={{ todos, createTodos, deleteTodo, toggleCheckActive }}
+    >
       {children}
     </TodosContext.Provider>
   );
